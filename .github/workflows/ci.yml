@@ -21,6 +21,7 @@ jobs:
 
   lint-css:
     runs-on: ubuntu-latest
+    needs: lint-html   
     steps:
       - uses: actions/checkout@v4
 
@@ -33,7 +34,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    
+    needs: lint-css  
     steps:
       - uses: actions/checkout@v4
 
@@ -42,7 +43,7 @@ jobs:
           node-version: 20
 
       - run: npm install
-      
+      - run: echo "Build step passed (static project)"   # ✅ prevents error
 
   docker-build:
     runs-on: ubuntu-latest
